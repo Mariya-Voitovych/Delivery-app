@@ -10,18 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_110900) do
-
+ActiveRecord::Schema.define(version: 20_210_917_110_900) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pgcrypto"
-  enable_extension "plpgsql"
+  enable_extension 'pgcrypto'
+  enable_extension 'plpgsql'
 
-  create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "estimated_delivery_date"
-    t.string "tracking_number"
-    t.integer "delivery_status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'packages', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.string 'estimated_delivery_date'
+    t.string 'tracking_number'
+    t.integer 'delivery_status'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
-
 end
