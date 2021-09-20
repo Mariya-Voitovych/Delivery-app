@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Package < ApplicationRecord
-  attr_readonly :tracking_number
-
+  STATES = %w[new processing delivered cancelled].freeze
+  enum delivery_status: STATES.zip(STATES).to_h, _default: 'new', _prefix: :status
   before_create :generate_tracking_number
-  enum delivery_status: { new: 0, processing: 1, delivered: 2, cancelled: 3 }, _default: 'new', _prefix: :status
+  attr_readonly :tracking_number
 
   private
 

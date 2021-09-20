@@ -9,3 +9,11 @@ Style/Documentation:
 
 Metrics/MethodLength:
   Max: 30
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/  
