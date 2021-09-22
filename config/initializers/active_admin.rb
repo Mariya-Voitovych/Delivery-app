@@ -332,4 +332,7 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
+
+  #Only active delivery managers can log in
+  config.authorization_adapter = "OnlyActiveManagersAuthorization"
 end

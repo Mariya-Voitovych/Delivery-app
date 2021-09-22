@@ -32,6 +32,7 @@ gem 'rubocop-rails', require: false
 #add gem 'active admin' for DeliveryManager
 gem 'activeadmin'
 gem 'devise'
+gem 'capybara', '>= 3.26'
 
 
 group :development, :test do
