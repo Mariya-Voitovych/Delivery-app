@@ -24,5 +24,4 @@ ActiveAdmin.register DeliveryManager do
     end
     f.actions
   end
-
 end

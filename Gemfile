@@ -29,11 +29,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 # gem 'robocop'
 gem 'rubocop-rails', require: false
-#add gem 'active admin' for DeliveryManager
+# add gem 'active admin' for DeliveryManager
 gem 'activeadmin'
 gem 'devise'
-gem 'capybara', '>= 3.26'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -58,8 +56,8 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
