@@ -6,6 +6,8 @@ class Package < ApplicationRecord
   before_create :generate_tracking_number
   attr_readonly :tracking_number
 
+  validates_uniqueness_of :tracking_number
+
   private
 
   def generate_tracking_number
