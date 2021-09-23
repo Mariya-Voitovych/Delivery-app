@@ -3,7 +3,7 @@ describe "the login process", type: :feature do
     DeliveryManager.create(email: 'user@example.com', password: 'password', enabled: true)
   end
 
-  it "logs delivery manager in" do
+  it "logs active delivery manager in" do
     visit '/admin/login'
     within("#login") do
       fill_in 'Email', with: 'user@example.com'
@@ -17,7 +17,7 @@ describe "the login process", type: :feature do
     DeliveryManager.create(email: 'user_wrong@example.com', password: 'password', enabled: false)
   end
 
-  it "logs delivery manager in" do
+  it "logs not active delivery manager in" do
     visit '/admin/login'
     within("#login") do
       fill_in 'Email', with: 'user_wrong@example.com'
