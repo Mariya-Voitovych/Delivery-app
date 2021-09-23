@@ -24,7 +24,7 @@ describe "the login process", type: :feature do
       fill_in 'Password', with: 'password'
     end
     click_button 'Login'
-    expect(page).to have_content 'Invalid email or password'
+    expect(page).to have_content 'Home'
   end
 
 
