@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PackagesController < ApplicationController
-  before_action :authenticate_delivery_manager!
+  before_action :authenticate_user!
 
   def index
     @packages = Package.all
@@ -12,9 +12,10 @@ class PackagesController < ApplicationController
   end
 
   def create
-    @package = Package.create(package_params)
     authorize Package
-    if @package.save
+    @package = Package::Create.call(package_params)
+
+    if @package.persisted?
       render status: :created
     else
       render status: :unprocessable_entity, json: @package.errors.full_messages
@@ -28,6 +29,6 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    params.require(:package).permit(:estimated_delivery_date, :tracking_number, :delivery_status, :courier_id)
+    params.require(:package).permit(:estimated_delivery_date, :delivery_status, :courier_id)
   end
 end

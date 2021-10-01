@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe(PackagesController, type: :controller) do
-
   let(:courier) { Courier.create(name: 'Mary', email: 'mary@gmail.com') }
-  let(:package) { Package.create(estimated_delivery_date: '12.09.21', courier_id:courier.id) }
-  let(:delivery_manager) { DeliveryManager.create(enabled: true, email:'dodo@gmail.com', password:'password') }
-  
-  before do
-    sign_in delivery_manager
-  end
+  let!(:package) { Package.create(estimated_delivery_date: '12.09.21', courier_id: courier.id) }
+  let(:user) { User.create(email: 'user@gmail.com', password: '111111', role: 'delivery_manager') }
 
+  before do
+    sign_in user
+  end
 
   describe 'GET index' do
     it 'has a 200 status code' do
@@ -35,7 +33,7 @@ RSpec.describe(PackagesController, type: :controller) do
   describe 'POST create' do
     it 'successfully creates a new package' do
       expect do
-        post(:create, params: { package: { estimated_delivery_date: '12.09.21', courier_id:courier.id } })
+        post(:create, params: { package: { estimated_delivery_date: '12.09.21', courier_id: courier.id } })
       end.to(change(Package, :count).by(1))
     end
   end

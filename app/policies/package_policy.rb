@@ -1,5 +1,5 @@
 class PackagePolicy < ApplicationPolicy
   def create?
-    user.respond_to? :email
+    user.delivery_manager?
   end
 end

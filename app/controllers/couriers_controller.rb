@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CouriersController < ApplicationController
-  before_action :authenticate_delivery_manager!
-  
+  before_action :authenticate_user!
+
   def index
     @couriers = Courier.all
   end

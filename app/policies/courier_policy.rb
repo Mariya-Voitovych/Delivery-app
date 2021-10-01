@@ -1,11 +1,13 @@
 class CourierPolicy < ApplicationPolicy
   def create?
-    user.respond_to? :enabled
+    user.delivery_manager?
   end
+
   def update?
-    user.respond_to? :enabled
+    user.delivery_manager?
   end
+
   def destroy?
-    user.respond_to? :enabled
+    user.delivery_manager?
   end
 end
