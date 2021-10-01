@@ -1,5 +1,5 @@
 class PackagePolicy < ApplicationPolicy
   def create?
-    user.delivery_manager?
+    is_manager?(user)
   end
 end

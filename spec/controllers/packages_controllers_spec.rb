@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe(PackagesController, type: :controller) do
   let(:courier) { Courier.create(name: 'Mary', email: 'mary@gmail.com') }
   let!(:package) { Package.create(estimated_delivery_date: '12.09.21', courier_id: courier.id) }
-  let(:user) { User.create(email: 'user@gmail.com', password: '111111', role: 'delivery_manager') }
+  let!(:delivery_manager) { DeliveryManager.create(email: 'manager@gmail.com', password: 'password', enabled: true) }
+  let(:user) { User.create(email: 'manager@gmail.com', password: '111111', role: 'delivery_manager') }
 
   before do
     sign_in user

@@ -1,13 +1,13 @@
 class CourierPolicy < ApplicationPolicy
   def create?
-    user.delivery_manager?
+    is_manager?(user)
   end
 
   def update?
-    user.delivery_manager?
+    is_manager?(user)
   end
 
   def destroy?
-    user.delivery_manager?
+    is_manager?(user)
   end
 end

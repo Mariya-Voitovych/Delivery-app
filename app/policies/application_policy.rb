@@ -50,4 +50,8 @@ class ApplicationPolicy
 
     attr_reader :user, :scope
   end
+
+  def is_manager?(user)
+    DeliveryManager.find_by(email: user.email)
+  end
 end
