@@ -16,8 +16,8 @@ class CouriersController < ApplicationController
   end
 
   def create
-    @courier = Courier.create(courier_params)
     authorize Courier
+    @courier = Courier.create(courier_params)
     if @courier.save
       render status: :created
     else
@@ -30,8 +30,8 @@ class CouriersController < ApplicationController
   end
 
   def update
-    @courier = Courier.find(params[:id])
     authorize Courier
+    @courier = Courier.find(params[:id])
     if @courier.update(courier_params)
       redirect_to courier_path(@courier)
     else
@@ -40,8 +40,8 @@ class CouriersController < ApplicationController
   end
 
   def destroy
-    @courier = Courier.find(params[:id])
     authorize Courier
+    @courier = Courier.find(params[:id])
     @courier.destroy
 
     redirect_to couriers_path
