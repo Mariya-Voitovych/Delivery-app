@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_01_095606) do
+ActiveRecord::Schema.define(version: 2021_10_05_192923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -60,6 +60,15 @@ ActiveRecord::Schema.define(version: 2021_10_01_095606) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_delivery_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_delivery_managers_on_reset_password_token", unique: true
+  end
+
+  create_table "package_assignments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "courier_id"
+    t.bigint "package_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["courier_id"], name: "index_package_assignments_on_courier_id"
+    t.index ["package_id"], name: "index_package_assignments_on_package_id"
   end
 
   create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

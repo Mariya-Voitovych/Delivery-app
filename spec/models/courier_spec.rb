@@ -5,5 +5,6 @@ RSpec.describe Courier, type: :model do
     subject(:courier) { described_class.new }
 
     it { expect(courier).to(have_many(:packages)) }
+    it { is_expected.to(have_many(:package_assignments)) }
   end
 end

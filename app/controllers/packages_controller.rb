@@ -29,6 +29,6 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    params.require(:package).permit(:estimated_delivery_date, :tracking_number,:delivery_status, :courier_id)
+    params.require(:package).permit(:estimated_delivery_date, :tracking_number, :delivery_status, :courier_id)
   end
 end
