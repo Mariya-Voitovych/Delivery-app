@@ -21,7 +21,7 @@ class CouriersController < ApplicationController
     if @courier.save
       render status: :created
     else
-      render status: :unprocessable_entity, json: word.errors.full_messages
+      render status: :unprocessable_entity, json: courier.errors.full_messages
     end
   end
 

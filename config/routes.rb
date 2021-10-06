@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   resources :couriers
   resources :packages
+  resources :package_assignments
 end

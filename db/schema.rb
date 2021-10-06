@@ -63,12 +63,10 @@ ActiveRecord::Schema.define(version: 2021_10_05_192923) do
   end
 
   create_table "package_assignments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "courier_id"
-    t.bigint "package_id"
+    t.string "courier_id"
+    t.string "package_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["courier_id"], name: "index_package_assignments_on_courier_id"
-    t.index ["package_id"], name: "index_package_assignments_on_package_id"
   end
 
   create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -13,8 +13,7 @@ class PackagesController < ApplicationController
 
   def create
     authorize Package
-    @package = Package::Create.call(package_params)
-
+    @package = Package::Create.new(package_params).call
     if @package.persisted?
       render status: :created
     else
@@ -29,6 +28,6 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    params.require(:package).permit(:estimated_delivery_date, :tracking_number, :delivery_status, :courier_id)
+    params.require(:package).permit(:estimated_delivery_date, :tracking_number, :delivery_status)
   end
 end

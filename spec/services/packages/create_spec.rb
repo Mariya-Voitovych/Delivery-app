@@ -5,9 +5,10 @@ RSpec.describe Package::Create do
   let!(:params) { { courier_id: courier.id } }
 
   it 'create package' do
-    package = described_class.call(params)
+    package = described_class.new(params).call
 
     expect(Package.find(package.id)).to be_an_instance_of(Package)
     expect(package).to be_persisted
+    expect(package.tracking_number.length).to eq(12)
   end
 end
