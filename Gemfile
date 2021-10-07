@@ -32,6 +32,7 @@ gem 'rubocop-rails', require: false
 # add gem 'active admin' for DeliveryManager
 gem 'activeadmin'
 gem 'devise'
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
