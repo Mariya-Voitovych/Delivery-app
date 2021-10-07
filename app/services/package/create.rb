@@ -5,13 +5,14 @@ class Package
     end
 
     def call
-      create_paskage
+      create_package
     end
 
     private
 
-    def create_paskage
-      package = Package.create(@package_params)
+    def create_package
+      courier = Courier.find(@package_params[:courier_id])
+      package = courier.packages.new(@package_params)
       package.tracking_number = "YA#{SecureRandom.alphanumeric(8)}AA"
       package.save
       package

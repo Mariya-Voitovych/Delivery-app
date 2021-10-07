@@ -4,7 +4,8 @@ class PackagesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @packages = Package.all
+    @courier  = Courier.find(params[:courier_id])
+    @packages = @courier.packages.all
   end
 
   def new
@@ -28,6 +29,6 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    params.require(:package).permit(:estimated_delivery_date, :tracking_number, :delivery_status)
+    params.require(:package).permit(:estimated_delivery_date, :tracking_number, :delivery_status, :courier_id)
   end
 end

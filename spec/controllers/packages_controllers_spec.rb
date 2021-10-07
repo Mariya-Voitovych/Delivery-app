@@ -12,21 +12,21 @@ RSpec.describe(PackagesController, type: :controller) do
 
   describe 'GET index' do
     it 'has a 200 status code' do
-      get :index
+      get :index, params: { courier_id: courier.id }
       expect(response.status).to(eq(200))
     end
   end
 
   describe 'GET show' do
     it 'has a 200 status code' do
-      get :show, params: { id: package.id }
+      get :show, params: { courier_id: courier.id, id: package.id }
       expect(response.status).to(eq(200))
     end
   end
 
   describe 'GET new' do
     it 'has a 200 status code' do
-      get :new
+      get :new, params: { courier_id: courier.id }
       expect(response.status).to(eq(200))
     end
   end
@@ -34,7 +34,9 @@ RSpec.describe(PackagesController, type: :controller) do
   describe 'POST create' do
     it 'successfully creates a new package' do
       expect do
-        post(:create, params: { package: { estimated_delivery_date: '12.09.21', courier_id: courier.id } })
+        post(:create,
+             params: { courier_id: courier.id,
+                       package: { estimated_delivery_date: '12.09.21', courier_id: courier.id } })
       end.to(change(Package, :count).by(1))
     end
   end

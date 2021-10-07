@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   devise_for :delivery_managers, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :couriers
-  resources :packages
+  resources :couriers do
+    resources :packages, only: %i[index new create show]
+  end  
   resources :package_assignments
 end
