@@ -22,5 +22,5 @@ class PackageAssignmentsController < ApplicationController
 
   def package_assignment_params
     params.require(:package_assignment).permit(:courier_id, :package_id)
-  end 
+  end
 end
