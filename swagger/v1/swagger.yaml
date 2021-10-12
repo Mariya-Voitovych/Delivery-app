@@ -1,0 +1,238 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/couriers":
+    post:
+      summary: Creates a courier
+      tags:
+      - Couriers
+      parameters: []
+      responses:
+        '201':
+          description: courier created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+              required:
+              - name
+              - email
+    get:
+      summary: Show all couriers
+      tags:
+      - Couriers
+      parameters: []
+      responses:
+        '201':
+          description: index couriers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+              required:
+              - name
+              - email
+  "/couriers/new":
+    get:
+      summary: new courier
+      tags:
+      - Couriers
+      parameters: []
+      responses:
+        '201':
+          description: new couriers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+              required:
+              - name
+              - email
+  "/couriers/{id}":
+    get:
+      summary: Show a courier
+      tags:
+      - Couriers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: courier found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - name
+                - email
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - name
+                - email
+        '404':
+          description: courier not found
+    put:
+      summary: Update courier
+      tags:
+      - Couriers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: courier found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - name
+                - email
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - name
+                - email
+        '404':
+          description: courier not found
+    delete:
+      summary: Delete a courier
+      tags:
+      - Couriers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: courier found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - name
+                - email
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - name
+                - email
+        '404':
+          description: courier not found
+  "/couriers/{id}/packages":
+    post:
+      summary: Creates a package
+      tags:
+      - Packages
+      parameters: []
+      responses:
+        '201':
+          description: package created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                delivery_status:
+                  type: string
+                estimated_delivery_date:
+                  type: date
+                tracking_number:
+                  type: string
+                courier_id:
+                  type: string
+              required:
+              - delivery status
+              - estimated delivery_date
+              - tracking number
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
