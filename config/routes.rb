@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  scope '/auth' do
+    post '/signin', to: 'courier_token#create'
+    post '/signup', to: 'couriers#create'
+   end
   devise_for :users, path: 'user'
   get 'home/home'
   root to: 'home#home'
