@@ -14,4 +14,5 @@ Rails.application.routes.draw do
     resources :packages, only: %i[index new create show]
   end  
   resources :package_assignments
+  resources :courier_token, only: :create
 end
