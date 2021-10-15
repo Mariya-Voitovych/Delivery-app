@@ -54,4 +54,8 @@ class ApplicationPolicy
   def is_manager?(user)
     DeliveryManager.find_by(email: user.email)
   end
+
+  def is_courier?(user)
+    Courier.find_by(email: user.email)
+  end
 end
