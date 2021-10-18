@@ -34,14 +34,18 @@ gem 'activeadmin'
 gem 'devise'
 gem 'pry', '~> 0.13.1'
 gem 'pundit'
+# add swagger doc
+gem 'rswag'
 gem 'bcrypt'
 gem 'knock', git: 'https://github.com/nsarno/knock', branch: 'master', ref: '9214cd027422df8dc31eb67c60032fbbf8fc100b'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Add rspec
   gem 'rspec-rails', '~> 5.0.0'
+  gem "rswag-specs"
 end
 
 group :development do
