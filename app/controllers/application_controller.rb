@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
+  include Knock::Authenticable
   protect_from_forgery with: :exception
 
   def access_denied(exception)

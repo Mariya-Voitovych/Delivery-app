@@ -34,8 +34,8 @@ gem 'activeadmin'
 gem 'devise'
 gem 'pry', '~> 0.13.1'
 gem 'pundit'
-gem 'pry', '~> 0.13.1'
-
+gem 'bcrypt'
+gem 'knock', git: 'https://github.com/nsarno/knock', branch: 'master', ref: '9214cd027422df8dc31eb67c60032fbbf8fc100b'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
