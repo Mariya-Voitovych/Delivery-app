@@ -1,10 +1,11 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/my', type: :request do
+RSpec.describe 'api/', type: :request do
     path '/couriers' do
   
-      post 'Creates a courier' do
+      post 'couriers/' do
         tags 'Couriers'
+        description 'Endpoint for creating couriers data'
         consumes 'application/json'
         parameter name: :courier, in: :body, schema: {
           type: :object,
@@ -21,8 +22,9 @@ RSpec.describe 'api/my', type: :request do
         end
       end
 
-      get 'Show all couriers' do
+      get 'couriers/' do
         tags 'Couriers'
+        description 'Endpoint for showing all couriers data'
         consumes 'application/json'
         parameter name: :courier, in: :body, schema: {
           type: :object,
@@ -41,8 +43,9 @@ RSpec.describe 'api/my', type: :request do
 
     path '/couriers/new' do
   
-      get 'new courier' do
+      get 'couriers/new' do
         tags 'Couriers'
+        description 'Endpoint for creating courier'
         consumes 'application/json'
         parameter name: :courier, in: :body, schema: {
           type: :object,
@@ -61,8 +64,9 @@ RSpec.describe 'api/my', type: :request do
 
     path '/couriers/{id}' do
 
-      get 'Show a courier' do
+      get 'couriers/:courier_id' do
         tags 'Couriers'
+        description 'Endpoint for showing couriers data'
         produces 'application/json', 'application/xml'
         parameter name: :id, in: :path, type: :string
   
@@ -85,8 +89,9 @@ RSpec.describe 'api/my', type: :request do
         end
       end
 
-      put 'Update courier' do
+      put 'couriers/:courier_id' do
         tags 'Couriers'
+        description 'Endpoint for updating couriers data'
         produces 'application/json', 'application/xml'
         parameter name: :id, in: :path, type: :string
   
@@ -109,8 +114,9 @@ RSpec.describe 'api/my', type: :request do
         end
       end
 
-      delete 'Delete a courier' do
+      delete 'couriers/:courier_id' do
         tags 'Couriers'
+        description 'Endpoint for delete courier'
         produces 'application/json', 'application/xml'
         parameter name: :id, in: :path, type: :string
   
@@ -136,8 +142,9 @@ RSpec.describe 'api/my', type: :request do
 
     path '/couriers/{id}/packages' do
   
-      post 'Creates a package' do
+      post 'couriers/:courier_id/packages/' do
         tags 'Packages'
+        description 'Endpoint for creating packages data'
         consumes 'application/json'
         parameter name: :package, in: :body, schema: {
           type: :object,
