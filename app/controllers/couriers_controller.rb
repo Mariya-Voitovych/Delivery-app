@@ -21,7 +21,7 @@ class CouriersController < ApplicationController
     if @courier.save
       render status: :created
     else
-      render status: :unprocessable_entity, json: courier.errors.full_messages
+      render status: :unprocessable_entity, json: @courier.errors.full_messages
     end
   end
 
@@ -50,6 +50,6 @@ class CouriersController < ApplicationController
   private
 
   def courier_params
-    params.require(:courier).permit(:name, :email)
+    params.require(:courier).permit(:name, :email, :password, :password_confirmation)
   end
 end
