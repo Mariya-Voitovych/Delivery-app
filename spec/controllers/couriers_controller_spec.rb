@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe(CouriersController, type: :controller) do
+
   let(:courier) { create(:courier) }
   let!(:delivery_manager) { create(:delivery_manager) }
   let(:user) { create(:user, email: delivery_manager.email) }
@@ -33,7 +34,7 @@ RSpec.describe(CouriersController, type: :controller) do
   describe 'POST create' do
     it 'successfully creates a new courier' do
       expect do
-        post(:create, params: { courier: { name: 'Ivan', email: 'ivan@gmail.com' } })
+        post(:create, params: { courier: { name: 'Ivan', email: 'ivan@gmail.com', password: '111111', password_confirmation: '111111' } })
       end.to(change(Courier, :count).by(1))
     end
   end

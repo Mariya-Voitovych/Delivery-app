@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe(PackageAssignmentsController, type: :controller) do
+
   let!(:courier) { create(:courier) }
   let!(:package) { create(:package) }
   let(:package_assignment) { create(:package_assignment) }

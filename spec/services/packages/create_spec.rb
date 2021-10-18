@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Package::Create do
+
   let!(:courier) { create(:courier) }
   let!(:params) { { courier_id: courier.id } }
 
