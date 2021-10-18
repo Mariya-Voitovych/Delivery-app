@@ -52,10 +52,10 @@ class ApplicationPolicy
   end
 
   def is_manager?(user)
-    DeliveryManager.find_by(email: user.email)
+    DeliveryManager.any? { |manager| manager.email == user.email }
   end
 
   def is_courier?(user)
-    Courier.find_by(email: user.email)
+    Courier.any? { |courier| courier.email == user.email }
   end
 end
