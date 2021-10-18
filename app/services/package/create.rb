@@ -1,5 +1,7 @@
 class Package
   class Create
+    attr_accessor :package_params
+
     def initialize(package_params)
       @package_params = package_params
     end

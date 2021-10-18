@@ -32,6 +32,7 @@ gem 'rubocop-rails', require: false
 # add gem 'active admin' for DeliveryManager
 gem 'activeadmin'
 gem 'devise'
+gem 'pry', '~> 0.13.1'
 gem 'pundit'
 
 group :development, :test do
