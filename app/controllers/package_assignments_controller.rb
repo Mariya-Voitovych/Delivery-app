@@ -3,6 +3,11 @@
 class PackageAssignmentsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    authorize PackageAssignment
+    @package_assignments = PackageAssignment.all
+  end
+
   def new
     @package_assignment = PackageAssignment.new
   end
