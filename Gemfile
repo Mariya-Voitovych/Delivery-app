@@ -38,6 +38,8 @@ gem 'pundit'
 gem 'rswag'
 gem 'bcrypt'
 gem 'knock', git: 'https://github.com/nsarno/knock', branch: 'master', ref: '9214cd027422df8dc31eb67c60032fbbf8fc100b'
+# State machine gem for Package
+gem 'aasm'
 
 
 group :development, :test do
