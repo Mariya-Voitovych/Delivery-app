@@ -1,5 +1,4 @@
 class PackageAssignmentPolicy < ApplicationPolicy
-
   def index?
     is_courier?(user)
   end
