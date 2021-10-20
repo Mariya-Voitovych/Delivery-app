@@ -26,6 +26,19 @@ class PackagesController < ApplicationController
     @package = Package.find(params[:id])
   end
 
+  def edit
+    @package = Package.find(params[:id])
+  end
+
+  def update
+    @package = Package.find(params[:id])
+    if @package.update(package_params)
+      redirect_to courier_package_path(@package)
+    else
+      render status: :unprocessable_entity, json: @package.errors.full_messages
+    end
+  end
+
   private
 
   def package_params

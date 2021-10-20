@@ -1,0 +1,5 @@
+<h3>Update package</h3>
+<%=  form_for courier_package_path(@package), :method => :put do |form| %>
+  <%= form.text_field :delivery_status, placeholder: "delivery status" %>
+  <%= form.button :pickup, type: :submit %>
+<% end %>
