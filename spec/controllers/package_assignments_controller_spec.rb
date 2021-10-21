@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe(PackageAssignmentsController, type: :controller) do
-  let!(:courier) { Courier.create(name: 'Petro', email: 'manager@gmail.com', password_digest: '111111') }
-  let!(:package) { Package.create(estimated_delivery_date: '12.09.21', delivery_status: 'processing') }
-  let(:package_assignment) { PackageAssignment.create(courier_id: courier.id, package_id: package.id) }
-  let!(:delivery_manager) { DeliveryManager.create(email: 'manager@gmail.com', password: 'password', enabled: true) }
-  let(:user) { User.create(email: 'manager@gmail.com', password: '111111', role: 'delivery_manager') }
+
+  let!(:courier) { create(:courier) }
+  let!(:package) { create(:package) }
+  let(:package_assignment) { create(:package_assignment) }
+  let(:user) { create(:user, email: 'manager@gmail.com') }
 
   before do
     sign_in user

@@ -1,9 +1,7 @@
 describe CourierPolicy do
   subject { described_class }
 
-  before :each do
-    DeliveryManager.create(email: 'manager@gmail.com', password: 'password', enabled: true)
-  end
+  let(:delivery_manager) { create(:delivery_manager, enabled: true) }
 
   permissions :create?, :update?, :destroy? do
     it 'denies access if user is not delivery manager' do
@@ -12,7 +10,7 @@ describe CourierPolicy do
     end
 
     it 'grants access if user is delivery manager' do
-      expect(subject).to permit(User.new(email: 'manager@gmail.com', password: '111111', role: 'delivery_manager'),
+      expect(subject).to permit(User.new(email: delivery_manager.email, password: '111111', role: 'delivery_manager'),
                                 Courier.new(name: 'Pedro'))
     end
   end
