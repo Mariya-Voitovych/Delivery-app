@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Package::Create do
-  let!(:courier) { Courier.create(email: 'test@test.com', name: 'Petro', password_digest: '111111') }
+
+  let!(:courier) { create(:courier) }
   let!(:params) { { courier_id: courier.id } }
 
   it 'create package' do
