@@ -1,5 +1,13 @@
 <h3>Update package</h3>
-<%=  form_for courier_package_path(@package), :method => :put do |form| %>
-  <%= form.text_field :delivery_status, placeholder: "delivery status" %>
+
+<ul>
+<li>uuid: <%= @package.id%></li>
+<li>estimated delivery date: <%= @package.estimated_delivery_date%></li>
+<li>tracking number: <%= @package.tracking_number%></li>
+<li>delivery status: <%= @package.delivery_status%></li>
+</ul>
+
+<%  form_for do |form| %>
+ 
   <%= form.button :pickup, type: :submit %>
 <% end %>
