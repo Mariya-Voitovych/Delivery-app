@@ -1,6 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/', type: :request do
+
   path '/package_assignments' do
     post 'package_assignments/' do
       tags 'PackageAssignments'
@@ -23,25 +24,16 @@ RSpec.describe 'api/', type: :request do
 
     get 'package_assignments/' do
       tags 'PackageAssignments'
-      security [basic_auth: []]
+      security [ basic_auth: [] ]
       description 'Endpoint for showing all package_assignments data'
       consumes 'application/json'
-      parameter name: :package_assignment, in: :body, schema: {
-        type: :object,
-        properties: {
-          package_id: { type: :string },
-          courier_id: { type: :string }
-        },
-        required: %w[package_id courier_id]
-      }
 
-      response '201', 'package_assignments' do
+      response '200', 'package_assignments' do
         let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
         run_test!
       end
 
       response '401', 'authentication failed' do
-        let(:Authorization) { "Basic #{::Base64.strict_encode64('bogus:bogus')}" }
         run_test!
       end
     end
@@ -52,16 +44,8 @@ RSpec.describe 'api/', type: :request do
       tags 'PackageAssignments'
       description 'Endpoint for creating new package_assignment'
       consumes 'application/json'
-      parameter name: :package_assignment, in: :body, schema: {
-        type: :object,
-        properties: {
-          package_id: { type: :string },
-          courier_id: { type: :string }
-        },
-        required: %w[package_id courier_id]
-      }
 
-      response '201', 'new package_assignments' do
+      response '200', 'new package_assignments' do
         run_test!
       end
     end
