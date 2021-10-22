@@ -4,6 +4,6 @@ class PackageAssignmentPolicy < ApplicationPolicy
   end
 
   def create?
-    is_manager?(user) and record.package.status_processing?
+    is_manager?(user) && record.package.status_processing?
   end
 end

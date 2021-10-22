@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :couriers do
-    resources :packages, only: %i[index new create show]
+    resources :packages
   end  
   resources :package_assignments
   resources :courier_token, only: :create

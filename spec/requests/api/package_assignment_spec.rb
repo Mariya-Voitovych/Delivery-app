@@ -1,6 +1,10 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/', type: :request do
+RSpec.describe 'api', type: :request do
+
+  let(:courier) { create(:courier) }
+  let(:package) { create(:package, courier_id: courier.id) }
+  let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
 
   path '/package_assignments' do
     post 'package_assignments/' do
@@ -17,7 +21,7 @@ RSpec.describe 'api/', type: :request do
       }
 
       response '201', 'package assignment created' do
-        let(:package_assignment) { { package_id: 'first', courier_id: 'second' } }
+        let(:package_assignment) { { package_id: package.id, courier_id: courier.id } }
         run_test!
       end
     end
@@ -29,7 +33,6 @@ RSpec.describe 'api/', type: :request do
       consumes 'application/json'
 
       response '200', 'package_assignments' do
-        let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
         run_test!
       end
 

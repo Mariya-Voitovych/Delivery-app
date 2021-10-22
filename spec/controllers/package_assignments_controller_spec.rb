@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe(PackageAssignmentsController, type: :controller) do
 
   let!(:courier) { create(:courier) }
-  let!(:package) { create(:package) }
+  let!(:package) { create(:package, delivery_status: 'processing') }
+  let!(:manager) { create(:delivery_manager, email: courier.email) }
   let(:package_assignment) { create(:package_assignment) }
-  let(:user) { create(:user, email: 'manager@gmail.com') }
+  let(:user) { create(:user, email: manager.email) }
 
   before do
     sign_in user
