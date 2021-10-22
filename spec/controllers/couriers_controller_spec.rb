@@ -34,7 +34,9 @@ RSpec.describe(CouriersController, type: :controller) do
   describe 'POST create' do
     it 'successfully creates a new courier' do
       expect do
-        post(:create, params: { courier: { name: 'Ivan', email: 'ivan@gmail.com', password: '111111', password_confirmation: '111111' } })
+        post(:create,
+             params: { courier: { name: 'Ivan', email: 'ivan@gmail.com', password: '111111',
+                                  password_confirmation: '111111' } })
       end.to(change(Courier, :count).by(1))
     end
   end

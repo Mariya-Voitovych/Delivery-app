@@ -82,4 +82,3 @@ RSpec.describe 'TokenApi', type: :request do
     end
   end
 end
-
