@@ -24,7 +24,7 @@ describe PackageAssignmentPolicy do
                                     PackageAssignment.new(courier_id: courier.id, package_id: package_new.id))
     end
 
-    it 'grants access if user is delivery manager and delivery status is not processing' do
+    it 'grants access if user is delivery manager and delivery status is processing' do
       expect(subject).to permit(User.new(email: 'manager@gmail.com', password: '111111', role: 'delivery_manager'),
                                 PackageAssignment.new(courier_id: courier.id, package_id: package.id))
     end

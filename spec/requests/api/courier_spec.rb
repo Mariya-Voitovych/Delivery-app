@@ -1,6 +1,7 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/', type: :request do
+RSpec.describe 'api', type: :request do
+  
   path '/couriers' do
     post 'couriers/' do
       tags 'Couriers'
@@ -10,13 +11,14 @@ RSpec.describe 'api/', type: :request do
         type: :object,
         properties: {
           name: { type: :string },
-          email: { type: :string }
+          email: { type: :string },
+          password: { type: :string}
         },
-        required: %w[name email]
+        required: %w[name email password]
       }
 
       response '201', 'courier created' do
-        let(:courier) { { name: 'Pavlo', email: 'pavlo@gmail.com' } }
+        let(:courier) { { name: 'Pavlo', email: 'pavlo@gmail.com', password: 'password' } }
         run_test!
       end
     end
@@ -25,7 +27,7 @@ RSpec.describe 'api/', type: :request do
       tags 'Couriers'
       description 'Endpoint for showing all couriers data'
       consumes 'application/json'
-      response '201', 'index couriers' do
+      response '200', 'index couriers' do
         run_test!
       end
     end
@@ -36,7 +38,7 @@ RSpec.describe 'api/', type: :request do
       tags 'Couriers'
       description 'Endpoint for creating courier'
       consumes 'application/json'
-      response '201', 'new couriers' do
+      response '200', 'new couriers' do
         run_test!
       end
     end
@@ -52,13 +54,11 @@ RSpec.describe 'api/', type: :request do
       response '200', 'courier found' do
         schema type: :object,
                properties: {
-                 id: { type: :integer },
-                 name: { type: :string },
-                 email: { type: :string }
+                 id: { type: :string }
                },
-               required: %w[id name email]
+               required: %w[id]
 
-        let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com').id }
+        let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com', password: 'password').id }
         run_test!
       end
 
@@ -77,13 +77,14 @@ RSpec.describe 'api/', type: :request do
       response '200', 'courier found' do
         schema type: :object,
                properties: {
-                 id: { type: :integer },
+                 id: { type: :string },
                  name: { type: :string },
-                 email: { type: :string }
+                email: { type: :string },
+                password: { type: :string}
                },
-               required: %w[id name email]
+               required: %w[id]
 
-        let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com').id }
+        let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com', password: 'password').id }
         run_test!
       end
 
@@ -102,13 +103,11 @@ RSpec.describe 'api/', type: :request do
       response '200', 'courier found' do
         schema type: :object,
                properties: {
-                 id: { type: :integer },
-                 name: { type: :string },
-                 email: { type: :string }
+                 id: { type: :string }
                },
-               required: %w[id name email]
+               required: %w[id]
 
-        let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com').id }
+        let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com', password: 'password').id }
         run_test!
       end
 

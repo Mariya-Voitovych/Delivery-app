@@ -5,7 +5,7 @@ class PackageAssignmentsController < ApplicationController
 
   def index
     authorize PackageAssignment
-    @package_assignments = PackageAssignment.all
+    @package_assignments = PackageAssignment.includes(:courier, :package).all
   end
 
   def new
