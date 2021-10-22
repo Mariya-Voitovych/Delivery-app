@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe(PackageAssignmentsController, type: :controller) do
-  let!(:courier) { Courier.create(name: 'Petro', email: 'petro@gmail.com', password_digest: '111111') }
-  let!(:package) { Package.create(estimated_delivery_date: '12.09.21', delivery_status: 'processing') }
-  let(:package_assignment) { PackageAssignment.create(courier_id: courier.id, package_id: package.id) }
-  let!(:delivery_manager) { DeliveryManager.create(email: 'manager@gmail.com', password: 'password', enabled: true) }
-  let(:user) { User.create(email: 'manager@gmail.com', password: '111111', role: 'delivery_manager') }
+
+  let!(:courier) { create(:courier) }
+  let!(:package) { create(:package, delivery_status: 'processing') }
+  let!(:manager) { create(:delivery_manager, email: courier.email) }
+  let(:package_assignment) { create(:package_assignment) }
+  let(:user) { create(:user, email: manager.email) }
 
   before do
     sign_in user
@@ -23,6 +24,13 @@ RSpec.describe(PackageAssignmentsController, type: :controller) do
       expect do
         post(:create, params: { package_assignment: { courier_id: courier.id, package_id: package.id } })
       end.to(change(PackageAssignment, :count).by(1))
+    end
+  end
+
+  describe 'GET index' do
+    it 'has a 200 status code' do
+      get :index
+      expect(response.status).to(eq(200))
     end
   end
 end

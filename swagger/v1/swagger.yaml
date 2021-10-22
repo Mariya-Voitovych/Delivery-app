@@ -238,8 +238,89 @@ paths:
               - delivery status
               - estimated delivery_date
               - tracking number
+  "/package_assignments":
+    post:
+      summary: package_assignments/
+      tags:
+      - PackageAssignments
+      description: Endpoint for creating package assignment
+      parameters: []
+      responses:
+        '201':
+          description: package assignment created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                package_id:
+                  type: string
+                courier_id:
+                  type: string
+              required:
+              - package_id
+              - courier_id
+    get:
+      summary: package_assignments/
+      tags:
+      - PackageAssignments
+      security:
+      - basic_auth: []
+      description: Endpoint for showing all package_assignments data
+      parameters: []
+      responses:
+        '201':
+          description: package_assignments
+        '401':
+          description: authentication failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                package_id:
+                  type: string
+                courier_id:
+                  type: string
+              required:
+              - package_id
+              - courier_id
+  "/package_assignments/new":
+    get:
+      summary: package_assignments/new/
+      tags:
+      - PackageAssignments
+      description: Endpoint for creating new package_assignment
+      parameters: []
+      responses:
+        '201':
+          description: new package_assignments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                package_id:
+                  type: string
+                courier_id:
+                  type: string
+              required:
+              - package_id
+              - courier_id
 servers:
 - url: https://{defaultHost}
   variables:
     defaultHost:
       default: www.example.com
+components:
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
+    api_key:
+      type: apiKey
+      name: api_key
+      in: query

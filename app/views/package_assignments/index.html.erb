@@ -1,0 +1,30 @@
+<h2> Assigned paskages for all couriers: </h2>
+
+<ol>
+<% @package_assignments.each do |package_assignment|%>
+  <li>
+    <ul>
+      <li>uuid: <%= package_assignment.package.id%></li>
+      <li>estimated delivery date: <%= package_assignment.package.estimated_delivery_date%></li>
+      <li>tracking number: <%= package_assignment.package.tracking_number%></li>
+      <li>delivery status: <%= package_assignment.package.delivery_status%></li>
+    </ul>
+  </li>
+<% end %>
+</ol>
+
+<h2> Assigned paskages for you: </h2>
+
+<ol>
+<% @package_assignments.each do |package_assignment| if package_assignment.courier.email == current_user.email%>
+  <li>
+    <ul>
+      <li>uuid: <%= package_assignment.package.id%></li>
+      <li>estimated delivery date: <%= package_assignment.package.estimated_delivery_date%></li>
+      <li>tracking number: <%= package_assignment.package.tracking_number%></li>
+      <li>delivery status: <%= package_assignment.package.delivery_status%></li>
+    </ul>
+  </li>
+  <% end %>
+<% end %>
+</ol>

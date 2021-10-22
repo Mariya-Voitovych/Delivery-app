@@ -23,6 +23,7 @@ class PackagesController < ApplicationController
   end
 
   def show
+    authorize Package
     @package = Package.find(params[:id])
   end
 

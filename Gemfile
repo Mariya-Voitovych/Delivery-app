@@ -35,11 +35,11 @@ gem 'devise'
 gem 'pry', '~> 0.13.1'
 gem 'pundit'
 # add swagger doc
-gem 'rswag'
 gem 'bcrypt'
 gem 'knock', git: 'https://github.com/nsarno/knock', branch: 'master', ref: '9214cd027422df8dc31eb67c60032fbbf8fc100b'
 # State machine gem for Package
 gem 'aasm'
+gem 'rswag'
 
 
 group :development, :test do
@@ -47,6 +47,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Add rspec
   gem 'rspec-rails', '~> 5.0.0'
+  gem 'ffaker'
+  gem "factory_bot_rails"
   gem "rswag-specs"
 end
 
