@@ -58,4 +58,8 @@ class ApplicationPolicy
   def is_courier?(user)
     Courier.any? { |courier| courier.email == user.email }
   end
+
+  def self_update(user)
+    user.email == record.email
+  end  
 end

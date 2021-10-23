@@ -30,8 +30,8 @@ class CouriersController < ApplicationController
   end
 
   def update
-    authorize Courier
     @courier = Courier.find(params[:id])
+    authorize @courier
     if @courier.update(courier_params)
       redirect_to courier_path(@courier)
     else

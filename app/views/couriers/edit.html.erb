@@ -1,0 +1,14 @@
+<div id="edit_courier">
+<h1>Add driver license for courier <%= @courier.id%> </h1>
+
+<%= form_with model: @courier, url: courier_path, method: :patch do |f| %>
+
+  <div>
+    <%= f.label "Driver license:" %><br>
+    <%= f.file_field :driver_license %>
+  </div>
+
+  <%= f.submit 'Add driver license' %>
+
+<% end %>
+</div>

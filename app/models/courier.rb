@@ -5,4 +5,5 @@ class Courier < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   has_many :package_assignments
   has_many :packages, through: :package_assignments
+  has_one_attached :driver_license
 end
