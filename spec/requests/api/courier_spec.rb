@@ -2,6 +2,21 @@ require 'swagger_helper'
 
 RSpec.describe 'api', type: :request do
   
+  let!(:user) { create(:user) }
+
+  def authenticated_header(user)
+    token = Knock::AuthToken.new(payload: { sub: user.id }).token
+    { 'Authorization': "Bearer #{token}" }
+  end
+
+  describe 'GET /users?me=true' do
+    URL = '/v1/users?me=true'
+    AUTH_URL = '/user_token'  
+
+    before do
+      headers authenticated_header(user)
+    end
+  
   path '/couriers' do
     post 'couriers/' do
       tags 'Couriers'
@@ -117,4 +132,5 @@ RSpec.describe 'api', type: :request do
       end
     end
   end
+end
 end

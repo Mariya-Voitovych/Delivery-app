@@ -1,10 +1,12 @@
 require 'swagger_helper'
 
 RSpec.describe 'api', type: :request do
-
-  let(:courier) { create(:courier) }
-  let(:package) { create(:package, courier_id: courier.id) }
-  let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
+  let!(:delivery_manager) { create(:delivery_manager) }
+  let!(:user) { create(:user, email: delivery_manager.email) }
+  def login(user)
+    post user_session_path, :email => user.email, :password => 'password'
+  end
+  
 
   path '/package_assignments' do
     post 'package_assignments/' do
@@ -25,6 +27,7 @@ RSpec.describe 'api', type: :request do
         run_test!
       end
     end
+  
 
     get 'package_assignments/' do
       tags 'PackageAssignments'

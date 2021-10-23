@@ -27,12 +27,11 @@ class PackagesController < ApplicationController
     @package = Package.find(params[:id])
   end
 
-  def edit
-    @package = Package.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @package = Package.find(params[:id])
+    @courier  = Courier.find(params[:courier_id])
+    @package = Courier.packages.find(params[:id])
     if @package.update(package_params)
       redirect_to courier_package_path(@package)
     else
