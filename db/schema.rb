@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_23_102648) do
+ActiveRecord::Schema.define(version: 2021_10_24_195641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2021_10_23_102648) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "password_digest"
+    t.boolean "validation"
     t.index ["email"], name: "index_couriers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_couriers_on_reset_password_token", unique: true
   end
