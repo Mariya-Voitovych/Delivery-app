@@ -1,5 +1,4 @@
 describe 'the login process', type: :feature do
-  
   let!(:delivery_manager) { create(:delivery_manager, enabled: true) }
   let!(:delivery_manager_not_active) { create(:delivery_manager) }
 

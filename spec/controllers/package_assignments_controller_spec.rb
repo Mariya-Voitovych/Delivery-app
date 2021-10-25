@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe(PackageAssignmentsController, type: :controller) do
-
   let!(:courier) { create(:courier) }
   let!(:package) { create(:package, delivery_status: 'processing') }
   let!(:manager) { create(:delivery_manager, email: courier.email) }

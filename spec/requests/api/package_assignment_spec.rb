@@ -4,9 +4,8 @@ RSpec.describe 'api', type: :request do
   let!(:delivery_manager) { create(:delivery_manager) }
   let!(:user) { create(:user, email: delivery_manager.email) }
   def login(user)
-    post user_session_path, :email => user.email, :password => 'password'
+    post user_session_path, email: user.email, password: 'password'
   end
-  
 
   path '/package_assignments' do
     post 'package_assignments/' do
@@ -27,11 +26,10 @@ RSpec.describe 'api', type: :request do
         run_test!
       end
     end
-  
 
     get 'package_assignments/' do
       tags 'PackageAssignments'
-      security [ basic_auth: [] ]
+      security [basic_auth: []]
       description 'Endpoint for showing all package_assignments data'
       consumes 'application/json'
 

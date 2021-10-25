@@ -12,16 +12,16 @@ class Package < ApplicationRecord
     state :delivered
     state :cancelled
     state :assigned
-    state :pickuped  
-    
+    state :pickuped
+
     event :pickup do
-      transitions from: :assigned, 
-        to: :pickuped 
-    end    
+      transitions from: :assigned,
+                  to: :pickuped
+    end
 
     event :cancel do
-      transitions from: :assigned, 
-        to: :cancelled
+      transitions from: :assigned,
+                  to: :cancelled
     end
   end
 end

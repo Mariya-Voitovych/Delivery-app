@@ -45,7 +45,7 @@ RSpec.configure do |config|
           security: {
             basicAuth: [],
             ApiKeyAuth: []
-          }  
+          }
         }
       }
     }
