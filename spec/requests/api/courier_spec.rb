@@ -1,12 +1,10 @@
 require 'swagger_helper'
 
 RSpec.xdescribe 'api', type: :request do
-
   def authenticated_header(user)
     token = Knock::AuthToken.new(payload: { sub: user.id }).token
     { 'Authorization': "Bearer #{token}" }
   end
-
 
   let!(:delivery_manager) { create(:delivery_manager) }
   let(:user) { create(:user, email: delivery_manager.email) }
@@ -14,7 +12,7 @@ RSpec.xdescribe 'api', type: :request do
   before do
     authenticate(user)
   end
-  
+
   path '/couriers' do
     post 'couriers/' do
       tags 'Couriers'
@@ -25,7 +23,7 @@ RSpec.xdescribe 'api', type: :request do
         properties: {
           name: { type: :string },
           email: { type: :string },
-          password: { type: :string}
+          password: { type: :string }
         },
         required: %w[name email password]
       }
@@ -92,8 +90,8 @@ RSpec.xdescribe 'api', type: :request do
                properties: {
                  id: { type: :string },
                  name: { type: :string },
-                email: { type: :string },
-                password: { type: :string}
+                 email: { type: :string },
+                 password: { type: :string }
                },
                required: %w[id]
 

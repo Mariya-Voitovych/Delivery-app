@@ -3,7 +3,6 @@ describe PackagePolicy do
 
   let(:delivery_manager) { create(:delivery_manager, enabled: true) }
   let(:courier) { create(:courier) }
-  
 
   permissions :create? do
     it 'denies access if user is not delivery manager' do

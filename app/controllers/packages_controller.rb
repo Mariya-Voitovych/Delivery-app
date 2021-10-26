@@ -3,6 +3,7 @@
 class PackagesController < ApplicationController
   before_action :authenticate_user!
   before_action :require_valid_courier
+  before_action :auth_package, only: %w[create show]
 
   def index
     @courier  = Courier.find(params[:courier_id])
@@ -14,7 +15,6 @@ class PackagesController < ApplicationController
   end
 
   def create
-    authorize Package
     @package = Package::Create.new(package_params).call
     if @package.persisted?
       render status: :created
@@ -24,7 +24,6 @@ class PackagesController < ApplicationController
   end
 
   def show
-    authorize Package
     @package = Package.find(params[:id])
   end
 
@@ -32,5 +31,9 @@ class PackagesController < ApplicationController
 
   def package_params
     params.require(:package).permit(:estimated_delivery_date, :tracking_number, :delivery_status, :courier_id)
+  end
+
+  def auth_package
+    authorize Package
   end
 end

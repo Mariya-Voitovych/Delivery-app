@@ -61,5 +61,5 @@ class ApplicationPolicy
 
   def self_update(user)
     user.email == record.email
-  end  
+  end
 end

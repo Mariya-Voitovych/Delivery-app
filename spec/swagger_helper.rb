@@ -32,13 +32,13 @@ RSpec.configure do |config|
         }
       ],
       securityDefinitions: {
-    Bearer: {
-      description: '...',
-      type: :apiKey,
-      name: 'Authorization',
-      in: :header
-    }
-  }
+        Bearer: {
+          description: '...',
+          type: :apiKey,
+          name: 'Authorization',
+          in: :header
+        }
+      }
     }
   }
 

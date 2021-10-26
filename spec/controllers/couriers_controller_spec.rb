@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe(CouriersController, type: :controller) do
-
   let(:courier) { create(:courier) }
   let!(:delivery_manager) { create(:delivery_manager, email: courier.email) }
   let(:user) { create(:user, email: courier.email) }

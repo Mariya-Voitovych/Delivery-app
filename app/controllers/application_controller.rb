@@ -13,8 +13,6 @@ class ApplicationController < ActionController::Base
   private
 
   def require_valid_courier
-    if Courier.find { |courier| courier.email == current_user.email }.validation != true
-    redirect_to main_app.root_url
-    end
+    redirect_to main_app.root_url if Courier.find { |courier| courier.email == current_user.email }.validation != true
   end
 end

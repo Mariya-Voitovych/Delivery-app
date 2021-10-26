@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :courier do
-    name { "Sergiy"}
+    name { 'Sergiy' }
     email { FFaker::Internet.email }
     password { 'password' }
     validation { true }

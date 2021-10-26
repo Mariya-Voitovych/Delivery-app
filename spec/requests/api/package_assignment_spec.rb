@@ -1,7 +1,6 @@
 require 'swagger_helper'
 
 RSpec.xdescribe 'api', type: :request do
-
   let(:courier) { create(:courier) }
   let(:package) { create(:package, courier_id: courier.id) }
   let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
@@ -28,7 +27,7 @@ RSpec.xdescribe 'api', type: :request do
 
     get 'package_assignments/' do
       tags 'PackageAssignments'
-      security [ basic_auth: [] ]
+      security [basic_auth: []]
       description 'Endpoint for showing all package_assignments data'
       consumes 'application/json'
 

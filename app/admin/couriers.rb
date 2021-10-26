@@ -1,10 +1,8 @@
 ActiveAdmin.register Courier do
-
   show do
     render 'driver_license_partial', { courier: courier }
     default_main_content
   end
-  
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -20,5 +18,4 @@ ActiveAdmin.register Courier do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
 end
