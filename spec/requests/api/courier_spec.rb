@@ -1,6 +1,19 @@
 require 'swagger_helper'
 
 RSpec.describe 'api', type: :request do
+
+  def authenticated_header(user)
+    token = Knock::AuthToken.new(payload: { sub: user.id }).token
+    { 'Authorization': "Bearer #{token}" }
+  end
+
+
+  let!(:delivery_manager) { create(:delivery_manager) }
+  let(:user) { create(:user, email: delivery_manager.email) }
+
+  before do
+    authenticate(user)
+  end
   
   path '/couriers' do
     post 'couriers/' do

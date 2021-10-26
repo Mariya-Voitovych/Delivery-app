@@ -15,7 +15,7 @@ RSpec.configure do |config|
   # the root example_group in your specs, e.g. describe '...', swagger_doc: 'v2/swagger.json'
   config.swagger_docs = {
     'v1/swagger.yaml' => {
-      openapi: '3.0.1',
+      swagger: '2.0',
       info: {
         title: 'API V1',
         version: 'v1'
@@ -31,23 +31,14 @@ RSpec.configure do |config|
           }
         }
       ],
-      components: {
-        securitySchemes: {
-          basic_auth: {
-            type: :http,
-            scheme: :basic
-          },
-          api_key: {
-            type: :apiKey,
-            name: 'api_key',
-            in: :query
-          },
-          security: {
-            basicAuth: [],
-            ApiKeyAuth: []
-          }  
-        }
-      }
+      securityDefinitions: {
+    Bearer: {
+      description: '...',
+      type: :apiKey,
+      name: 'Authorization',
+      in: :header
+    }
+  }
     }
   }
 
@@ -55,5 +46,5 @@ RSpec.configure do |config|
   # The swagger_docs configuration option has the filename including format in
   # the key, this may want to be changed to avoid putting yaml in json files.
   # Defaults to json. Accepts ':json' and ':yaml'.
-  config.swagger_format = :yaml
+  config.swagger_format = :json
 end
