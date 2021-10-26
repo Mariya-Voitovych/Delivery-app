@@ -3,6 +3,7 @@
 class CouriersController < ApplicationController
   before_action :authenticate_user!
   before_action :find_courier, only: %w[show edit update destroy] 
+  before_action :require_valid_courier
 
   def index
     @couriers = Courier.all

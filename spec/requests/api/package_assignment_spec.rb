@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-RSpec.describe 'api', type: :request do
+RSpec.xdescribe 'api', type: :request do
 
   let(:courier) { create(:courier) }
   let(:package) { create(:package, courier_id: courier.id) }

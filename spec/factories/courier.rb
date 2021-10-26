@@ -3,5 +3,6 @@ FactoryBot.define do
     name { "Sergiy"}
     email { FFaker::Internet.email }
     password { 'password' }
+    validation { true }
   end
 end

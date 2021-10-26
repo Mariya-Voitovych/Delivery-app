@@ -2,6 +2,7 @@
 
 class PackagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_valid_courier
 
   def index
     @courier  = Courier.find(params[:courier_id])

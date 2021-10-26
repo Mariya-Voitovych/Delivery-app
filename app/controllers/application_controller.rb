@@ -9,4 +9,12 @@ class ApplicationController < ActionController::Base
       format.html { redirect_to main_app.root_url, notice: exception.message }
     end
   end
+
+  private
+
+  def require_valid_courier
+    if Courier.find { |courier| courier.email == current_user.email }.validation != true
+    redirect_to main_app.root_url
+    end
+  end
 end
