@@ -2,6 +2,7 @@
 
 class PackagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_package, only: %w[show update edit]
 
   def index
     @courier  = Courier.find(params[:courier_id])
@@ -24,7 +25,16 @@ class PackagesController < ApplicationController
 
   def show
     authorize Package
-    @package = Package.find(params[:id])
+  end
+
+  def edit; end
+
+  def update
+    if @package.update(package_params)
+      redirect_to courier_package_path(@package)
+    else
+      render status: :unprocessable_entity, json: @package.errors.full_messages
+    end
   end
 
   private
@@ -32,4 +42,8 @@ class PackagesController < ApplicationController
   def package_params
     params.require(:package).permit(:estimated_delivery_date, :tracking_number, :delivery_status, :courier_id)
   end
+
+  def find_package
+    @package = Package.find(params[:id])
+  end  
 end
