@@ -7,7 +7,7 @@ RSpec.describe 'api', type: :request do
   path '/package_assignments' do
     post 'package_assignments/' do
       tags 'PackageAssignments'
-      security [ basic_auth: [] ]
+      security [basic_auth: []]
       description 'Endpoint for creating package assignment'
       consumes 'application/json'
       parameter name: :package_assignment, in: :body, schema: {
@@ -47,7 +47,7 @@ RSpec.describe 'api', type: :request do
   path '/package_assignments/new' do
     get 'package_assignments/new/' do
       tags 'PackageAssignments'
-      security [ basic_auth: [] ]
+      security [basic_auth: []]
       description 'Endpoint for creating new package_assignment'
       consumes 'application/json'
 

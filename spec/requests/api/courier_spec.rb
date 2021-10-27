@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-RSpec.xdescribe 'api', type: :request do
+RSpec.describe 'api', type: :request do
   def authenticated_header(user)
     token = Knock::AuthToken.new(payload: { sub: user.id }).token
     { 'Authorization': "Bearer #{token}" }
@@ -8,6 +8,8 @@ RSpec.xdescribe 'api', type: :request do
 
   let!(:delivery_manager) { create(:delivery_manager) }
   let(:user) { create(:user, email: delivery_manager.email) }
+  let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
+  let(:api_key) { 'foobar' }
 
   before do
     authenticate(user)
@@ -16,6 +18,7 @@ RSpec.xdescribe 'api', type: :request do
   path '/couriers' do
     post 'couriers/' do
       tags 'Couriers'
+      security [{ basic_auth: [], api_key: [] }]
       description 'Endpoint for creating couriers data'
       consumes 'application/json'
       parameter name: :courier, in: :body, schema: {
@@ -36,6 +39,7 @@ RSpec.xdescribe 'api', type: :request do
 
     get 'couriers/' do
       tags 'Couriers'
+      security [{ basic_auth: [], api_key: [] }]
       description 'Endpoint for showing all couriers data'
       consumes 'application/json'
       response '200', 'index couriers' do
@@ -47,6 +51,7 @@ RSpec.xdescribe 'api', type: :request do
   path '/couriers/new' do
     get 'couriers/new' do
       tags 'Couriers'
+      security [{ basic_auth: [], api_key: [] }]
       description 'Endpoint for creating courier'
       consumes 'application/json'
       response '200', 'new couriers' do
@@ -58,6 +63,7 @@ RSpec.xdescribe 'api', type: :request do
   path '/couriers/{id}' do
     get 'couriers/:courier_id' do
       tags 'Couriers'
+      security [{ basic_auth: [], api_key: [] }]
       description 'Endpoint for showing couriers data'
       produces 'application/json', 'application/xml'
       parameter name: :id, in: :path, type: :string
@@ -81,6 +87,7 @@ RSpec.xdescribe 'api', type: :request do
 
     put 'couriers/:courier_id' do
       tags 'Couriers'
+      security [{ basic_auth: [], api_key: [] }]
       description 'Endpoint for updating couriers data'
       produces 'application/json', 'application/xml'
       parameter name: :id, in: :path, type: :string
@@ -107,6 +114,7 @@ RSpec.xdescribe 'api', type: :request do
 
     delete 'couriers/:courier_id' do
       tags 'Couriers'
+      security [{ basic_auth: [], api_key: [] }]
       description 'Endpoint for delete courier'
       produces 'application/json', 'application/xml'
       parameter name: :id, in: :path, type: :string

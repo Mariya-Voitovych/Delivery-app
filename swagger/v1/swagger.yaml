@@ -9,6 +9,9 @@ paths:
       summary: couriers/
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for creating couriers data
       parameters: []
       responses:
@@ -34,6 +37,9 @@ paths:
       summary: couriers/
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for showing all couriers data
       responses:
         '200':
@@ -43,6 +49,9 @@ paths:
       summary: couriers/new
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for creating courier
       responses:
         '200':
@@ -52,6 +61,9 @@ paths:
       summary: couriers/:courier_id
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for showing couriers data
       parameters:
       - name: id
@@ -85,6 +97,9 @@ paths:
       summary: couriers/:courier_id
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for updating couriers data
       parameters:
       - name: id
@@ -130,6 +145,9 @@ paths:
       summary: couriers/:courier_id
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for delete courier
       parameters:
       - name: id
