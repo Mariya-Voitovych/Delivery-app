@@ -1,6 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api', type: :request do
+
   def authenticated_header(user)
     token = Knock::AuthToken.new(payload: { sub: user.id }).token
     { 'Authorization': "Bearer #{token}" }
@@ -58,82 +59,67 @@ RSpec.describe 'api', type: :request do
         run_test!
       end
     end
-  end
+  end  
 
-  path '/couriers/{id}' do
-    get 'couriers/:courier_id' do
-      tags 'Couriers'
-      security [{ basic_auth: [], api_key: [] }]
-      description 'Endpoint for showing couriers data'
-      produces 'application/json', 'application/xml'
-      parameter name: :id, in: :path, type: :string
-
-      response '200', 'courier found' do
-        schema type: :object,
-               properties: {
-                 id: { type: :string }
-               },
-               required: %w[id]
-
-        let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com', password: 'password').id }
-        run_test!
+    path '/couriers/{id}' do
+      put 'couriers/:courier_id' do
+        tags 'Couriers'
+        security [{ basic_auth: [], api_key: [] }]
+        description 'Endpoint for updating couriers data'
+        produces 'application/json', 'application/xml'
+        parameter name: :id, in: :path, type: :string
+  
+        response '200', 'courier found' do
+          schema type: :object,
+                 properties: {
+                   id: { type: :string },
+                   name: { type: :string },
+                   email: { type: :string },
+                   password: { type: :string }
+                 },
+                 required: %w[id]
+  
+          let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com', password: 'password').id }
+          run_test!
+        end
       end
 
-      response '404', 'courier not found' do
-        let(:id) { 'invalid' }
-        run_test!
-      end
-    end
-
-    put 'couriers/:courier_id' do
-      tags 'Couriers'
-      security [{ basic_auth: [], api_key: [] }]
-      description 'Endpoint for updating couriers data'
-      produces 'application/json', 'application/xml'
-      parameter name: :id, in: :path, type: :string
-
-      response '200', 'courier found' do
-        schema type: :object,
-               properties: {
-                 id: { type: :string },
-                 name: { type: :string },
-                 email: { type: :string },
-                 password: { type: :string }
-               },
-               required: %w[id]
-
-        let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com', password: 'password').id }
-        run_test!
+      get 'couriers/:courier_id' do
+        tags 'Couriers'
+        security [{ basic_auth: [], api_key: [] }]
+        description 'Endpoint for showing couriers data'
+        produces 'application/json', 'application/xml'
+        parameter name: :id, in: :path, type: :string
+  
+        response '200', 'courier found' do
+          schema type: :object,
+                 properties: {
+                   id: { type: :string }
+                 },
+                 required: %w[id]
+  
+          let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com', password: 'password').id }
+          run_test!
+        end
       end
 
-      response '404', 'courier not found' do
-        let(:id) { 'invalid' }
-        run_test!
-      end
-    end
+      delete 'couriers/:courier_id' do
+        tags 'Couriers'
+        security [{ basic_auth: [], api_key: [] }]
+        description 'Endpoint for delete courier'
+        produces 'application/json', 'application/xml'
+        parameter name: :id, in: :path, type: :string
 
-    delete 'couriers/:courier_id' do
-      tags 'Couriers'
-      security [{ basic_auth: [], api_key: [] }]
-      description 'Endpoint for delete courier'
-      produces 'application/json', 'application/xml'
-      parameter name: :id, in: :path, type: :string
+        response '200', 'courier found' do
+          schema type: :object,
+                 properties: {
+                   id: { type: :string }
+                 },
+                 required: %w[id]
 
-      response '200', 'courier found' do
-        schema type: :object,
-               properties: {
-                 id: { type: :string }
-               },
-               required: %w[id]
-
-        let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com', password: 'password').id }
-        run_test!
-      end
-
-      response '404', 'courier not found' do
-        let(:id) { 'invalid' }
-        run_test!
+          let(:id) { Courier.create(name: 'Mary', email: 'mary@gmail.com', password: 'password').id }
+          run_test!
+        end
       end
     end
-  end
 end

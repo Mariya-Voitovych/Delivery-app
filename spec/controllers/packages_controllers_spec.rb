@@ -40,4 +40,22 @@ RSpec.describe(PackagesController, type: :controller) do
       end.to(change(Package, :count).by(1))
     end
   end
+
+  describe 'GET edit' do
+    it 'has a 200 status code' do
+      get :edit, params: { courier_id: courier.id, id: package.id }
+      expect(response.status).to(eq(200))
+    end
+  end
+
+  describe 'PUT update' do
+    let(:package_params) { { estimated_delivery_date: '09.03.2022' } }
+
+    it 'successfully updated' do
+      put :update, params: { courier_id: courier.id, id: package.id, package: package_params }
+      package.reload
+
+      expect(package.estimated_delivery_date).to(eql(package_params[:estimated_delivery_date].to_date))
+    end
+  end
 end

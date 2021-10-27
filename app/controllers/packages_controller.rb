@@ -4,6 +4,8 @@ class PackagesController < ApplicationController
   before_action :authenticate_user!
   before_action :require_valid_courier
   before_action :auth_package, only: %w[create show]
+  before_action :find_package, only: %w[show update edit]
+
 
   def index
     @courier  = Courier.find(params[:courier_id])
@@ -23,8 +25,17 @@ class PackagesController < ApplicationController
     end
   end
 
-  def show
-    @package = Package.find(params[:id])
+  def show; end
+
+  def edit; end
+
+  def update
+    if @package.update(package_params)
+      redirect_to courier_package_path(@package)
+    else
+      render status: :unprocessable_entity, json: @package.errors.full_messages
+    end
+
   end
 
   private
@@ -36,4 +47,8 @@ class PackagesController < ApplicationController
   def auth_package
     authorize Package
   end
+
+  def find_package
+    @package = Package.find(params[:id])
+  end  
 end

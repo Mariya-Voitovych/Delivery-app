@@ -41,6 +41,10 @@ RSpec.configure do |config|
             type: :apiKey,
             name: 'api_key',
             in: :query
+          },
+          security: {
+            basicAuth: [],
+            ApiKeyAuth: []
           }
         }
       }
