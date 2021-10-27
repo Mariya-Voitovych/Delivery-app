@@ -3,18 +3,47 @@ require 'swagger_helper'
 RSpec.describe 'api', type: :request do
 
   def authenticated_header(user)
-    token = Knock::AuthToken.new(payload: { sub: user.id }).token
+    token = Knock::AuthToken.new(payload: { sub: courier.id }).token
     { 'Authorization': "Bearer #{token}" }
   end
 
-  let!(:delivery_manager) { create(:delivery_manager) }
-  let(:user) { create(:user, email: delivery_manager.email) }
+  let(:courier) { create(:courier) }
+  let!(:delivery_manager) { create(:delivery_manager, email: courier.email) }
+  let(:user) { create(:user, email: courier.email) }
   let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
   let(:api_key) { 'foobar' }
 
-  before do
-    authenticate(user)
-  end
+  let(:'access-token') { authenticated_header(courier)['access-token'] }
+  let(:'token-type') { authenticated_header(courier)['token-type'] }
+  let(:client) { authenticated_header(courier)['client'] }
+  let(:expiry) { authenticated_header(courier)['expiry'] }
+  let(:uid) { authenticated_header(courier)['uid'] }
+
+  path '/auth/signin/' do
+    post 'courier sign_in' do
+      tags 'couriers'
+      consumes 'application/json'
+
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          email: { type: :string },
+          password: { type: :string }
+        },
+        required: %w[email password]
+      }
+      produces 'application/json'
+
+      response '200', 'courier logged in' do
+        let(:params) { { email: courier.email, password: courier.password } }
+        header 'access-token', type: :string, description: 'Access token'
+        header 'client', type: :string, description: 'Client id'
+        header 'expiry', type: :string, description: 'Token expiry date'
+        header 'uid', type: :string, description: 'User email'
+        run_test!
+      end
+    end
+  end    
 
   path '/couriers' do
     post 'couriers/' do
@@ -22,18 +51,20 @@ RSpec.describe 'api', type: :request do
       security [{ basic_auth: [], api_key: [] }]
       description 'Endpoint for creating couriers data'
       consumes 'application/json'
-      parameter name: :courier, in: :body, schema: {
-        type: :object,
+      parameter name: :courier, in: :body
+      response '201', 'courier created' do schema type: :object,
         properties: {
           name: { type: :string },
           email: { type: :string },
           password: { type: :string }
         },
         required: %w[name email password]
-      }
 
-      response '201', 'courier created' do
-        let(:courier) { { name: 'Pavlo', email: 'pavlo@gmail.com', password: 'password' } }
+        parameter name: 'access-token', in: :header, type: :string
+        parameter name: 'token-type', in: :header, type: :string
+        parameter name: 'client', in: :header, type: :string
+        parameter name: 'expiry', in: :header, type: :string
+        parameter name: 'uid', in: :header, type: :string
         run_test!
       end
     end
