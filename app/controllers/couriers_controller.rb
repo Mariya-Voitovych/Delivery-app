@@ -2,21 +2,21 @@
 
 class CouriersController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_valid_courier
+  before_action :find_courier, except: %w[index new create]
+  before_action :auth_courier, only: %w[create destroy]
 
   def index
     @couriers = Courier.all
   end
 
-  def show
-    @courier = Courier.find(params[:id])
-  end
+  def show; end
 
   def new
     @courier = Courier.new
   end
 
   def create
-    authorize Courier
     @courier = Courier.create(courier_params)
     if @courier.save
       render status: :created
@@ -25,13 +25,10 @@ class CouriersController < ApplicationController
     end
   end
 
-  def edit
-    @courier = Courier.find(params[:id])
-  end
+  def edit; end
 
   def update
-    authorize Courier
-    @courier = Courier.find(params[:id])
+    authorize @courier
     if @courier.update(courier_params)
       redirect_to courier_path(@courier)
     else
@@ -40,8 +37,6 @@ class CouriersController < ApplicationController
   end
 
   def destroy
-    authorize Courier
-    @courier = Courier.find(params[:id])
     @courier.destroy
 
     redirect_to couriers_path
@@ -51,5 +46,13 @@ class CouriersController < ApplicationController
 
   def courier_params
     params.require(:courier).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def find_courier
+    @courier = Courier.find(params[:id])
+  end
+
+  def auth_courier
+    authorize Courier
   end
 end

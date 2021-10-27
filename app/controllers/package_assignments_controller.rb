@@ -2,6 +2,7 @@
 
 class PackageAssignmentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_valid_courier
 
   def index
     authorize PackageAssignment

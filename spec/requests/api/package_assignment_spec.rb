@@ -1,15 +1,14 @@
 require 'swagger_helper'
 
 RSpec.describe 'api', type: :request do
-  let!(:delivery_manager) { create(:delivery_manager) }
-  let!(:user) { create(:user, email: delivery_manager.email) }
-  def login(user)
-    post user_session_path, email: user.email, password: 'password'
-  end
+
+  let(:courier) { create(:courier) }
+  let(:package) { create(:package, courier_id: courier.id) }
 
   path '/package_assignments' do
     post 'package_assignments/' do
       tags 'PackageAssignments'
+      security [basic_auth: []]
       description 'Endpoint for creating package assignment'
       consumes 'application/json'
       parameter name: :package_assignment, in: :body, schema: {
@@ -23,6 +22,7 @@ RSpec.describe 'api', type: :request do
 
       response '201', 'package assignment created' do
         let(:package_assignment) { { package_id: package.id, courier_id: courier.id } }
+        let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
         run_test!
       end
     end
@@ -34,10 +34,12 @@ RSpec.describe 'api', type: :request do
       consumes 'application/json'
 
       response '200', 'package_assignments' do
+        let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
         run_test!
       end
 
       response '401', 'authentication failed' do
+        let(:Authorization) { "Basic #{::Base64.strict_encode64('bogus:bogus')}" }
         run_test!
       end
     end
@@ -46,10 +48,12 @@ RSpec.describe 'api', type: :request do
   path '/package_assignments/new' do
     get 'package_assignments/new/' do
       tags 'PackageAssignments'
+      security [basic_auth: []]
       description 'Endpoint for creating new package_assignment'
       consumes 'application/json'
 
       response '200', 'new package_assignments' do
+        let(:Authorization) { "Basic #{::Base64.strict_encode64('jsmith:jspass')}" }
         run_test!
       end
     end

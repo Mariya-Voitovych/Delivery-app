@@ -4,7 +4,7 @@ class CourierPolicy < ApplicationPolicy
   end
 
   def update?
-    is_manager?(user)
+    is_manager?(user) || self_update(user)
   end
 
   def destroy?

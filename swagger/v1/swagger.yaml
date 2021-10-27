@@ -9,6 +9,9 @@ paths:
       summary: couriers/
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for creating couriers data
       parameters: []
       responses:
@@ -24,59 +27,43 @@ paths:
                   type: string
                 email:
                   type: string
+                password:
+                  type: string
               required:
               - name
               - email
+              - password
     get:
       summary: couriers/
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for showing all couriers data
-      parameters: []
       responses:
-        '201':
+        '200':
           description: index couriers
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                email:
-                  type: string
-              required:
-              - name
-              - email
   "/couriers/new":
     get:
       summary: couriers/new
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for creating courier
-      parameters: []
       responses:
-        '201':
+        '200':
           description: new couriers
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                email:
-                  type: string
-              required:
-              - name
-              - email
   "/couriers/{id}":
     get:
       summary: couriers/:courier_id
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for showing couriers data
       parameters:
       - name: id
@@ -93,35 +80,26 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: integer
-                  name:
-                    type: string
-                  email:
                     type: string
                 required:
                 - id
-                - name
-                - email
             application/xml:
               schema:
                 type: object
                 properties:
                   id:
-                    type: integer
-                  name:
-                    type: string
-                  email:
                     type: string
                 required:
                 - id
-                - name
-                - email
         '404':
           description: courier not found
     put:
       summary: couriers/:courier_id
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for updating couriers data
       parameters:
       - name: id
@@ -138,35 +116,38 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: integer
+                    type: string
                   name:
                     type: string
                   email:
                     type: string
+                  password:
+                    type: string
                 required:
                 - id
-                - name
-                - email
             application/xml:
               schema:
                 type: object
                 properties:
                   id:
-                    type: integer
+                    type: string
                   name:
                     type: string
                   email:
                     type: string
+                  password:
+                    type: string
                 required:
                 - id
-                - name
-                - email
         '404':
           description: courier not found
     delete:
       summary: couriers/:courier_id
       tags:
       - Couriers
+      security:
+      - basic_auth: []
+        api_key: []
       description: Endpoint for delete courier
       parameters:
       - name: id
@@ -183,66 +164,26 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: integer
-                  name:
-                    type: string
-                  email:
                     type: string
                 required:
                 - id
-                - name
-                - email
             application/xml:
               schema:
                 type: object
                 properties:
                   id:
-                    type: integer
-                  name:
-                    type: string
-                  email:
                     type: string
                 required:
                 - id
-                - name
-                - email
         '404':
           description: courier not found
-  "/couriers/{id}/packages":
-    post:
-      summary: couriers/:courier_id/packages/
-      tags:
-      - Packages
-      description: Endpoint for creating packages data
-      parameters: []
-      responses:
-        '201':
-          description: package created
-        '422':
-          description: invalid request
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                delivery_status:
-                  type: string
-                estimated_delivery_date:
-                  type: date
-                tracking_number:
-                  type: string
-                courier_id:
-                  type: string
-              required:
-              - delivery status
-              - estimated delivery_date
-              - tracking number
   "/package_assignments":
     post:
       summary: package_assignments/
       tags:
       - PackageAssignments
+      security:
+      - basic_auth: []
       description: Endpoint for creating package assignment
       parameters: []
       responses:
@@ -268,48 +209,22 @@ paths:
       security:
       - basic_auth: []
       description: Endpoint for showing all package_assignments data
-      parameters: []
       responses:
-        '201':
+        '200':
           description: package_assignments
         '401':
           description: authentication failed
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                package_id:
-                  type: string
-                courier_id:
-                  type: string
-              required:
-              - package_id
-              - courier_id
   "/package_assignments/new":
     get:
       summary: package_assignments/new/
       tags:
       - PackageAssignments
+      security:
+      - basic_auth: []
       description: Endpoint for creating new package_assignment
-      parameters: []
       responses:
-        '201':
+        '200':
           description: new package_assignments
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                package_id:
-                  type: string
-                courier_id:
-                  type: string
-              required:
-              - package_id
-              - courier_id
 servers:
 - url: https://{defaultHost}
   variables:
