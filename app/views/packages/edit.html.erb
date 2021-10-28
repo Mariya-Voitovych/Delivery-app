@@ -10,3 +10,6 @@
     <%= package_field.submit "Confirm edit" %>
   <% end %>
 <% end %>
+
+<h3>Generate confirmation url:</h3>
+<%= link_to "Confirm", courier_package_path(current_user, @package), :method=> :put %>

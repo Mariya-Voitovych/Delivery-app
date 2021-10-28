@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_24_195641) do
+ActiveRecord::Schema.define(version: 2021_10_27_195847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(version: 2021_10_24_195641) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "courier_id"
+    t.string "delivery_confirmation_token"
+    t.datetime "delivery_confirmation_token_expiration"
     t.index ["courier_id"], name: "index_packages_on_courier_id"
   end
 
