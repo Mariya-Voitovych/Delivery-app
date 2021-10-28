@@ -1,10 +1,10 @@
 class Package
   class Update
-    attr_accessor :id, :courier_id
+    attr_accessor :package_params, :package
 
-    def initialize(id, courier_id)
-      @id = id
-      @courier_id = courier_id
+    def initialize(package_params, package)
+      @package_params = package_params
+      @package = package
     end
 
     def call
@@ -14,10 +14,8 @@ class Package
     private
 
     def update_package
-      package = Package.find(@id)
-      package.delivery_confirmation_token = Knock::AuthToken.new(payload: { sub: courier_id }).token
-      package.delivery_confirmation_token_expiration = Time.now + 10*60
-      package
+      @package_params[:delivery_status] = 'delivered'  if @package.delivery_confirmation_token_expiration <= Time.now         
+      @package_params
     end
   end
 end
